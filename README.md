@@ -2,7 +2,8 @@ Arvo OS
 
 Decentralized. Intelligent. Relentless.
 
-<img width="794" alt="image" src="https://github.com/user-attachments/assets/a5c24b41-6e35-4fc1-8411-160bd65abb6a" />
+![ARVO_OS_Banner](https://github.com/user-attachments/assets/3ff4231e-ae19-468b-81e7-9ef44af45bab)
+
 
 
 Arvo OS is a powerful, decentralized, modular framework for building the next generation of blockchain-native applications. Built for those who move relentlessly forward, Arvo OS blends swarm intelligence, AI agents, and cross-chain capabilities into a unified, battle-tested system.
