@@ -1,7 +1,7 @@
 {
-  "name": "juliaos-cli",
+  "name": "arvoos-cli",
   "version": "0.1.0",
-  "description": "JuliaOS Framework CLI - Command line interface for JuliaOS framework",
+  "description": "Arvo OS Framework CLI - Command line interface for Arvo OS framework",
   "main": "apps/cli.jl",
   "scripts": {
     "start": "julia apps/cli.jl",
@@ -20,6 +20,6 @@
   "devDependencies": {
     "Test": "1.8.0"
   },
-  "author": "JuliaOS Team",
+  "author": "Arvo OS Team",
   "license": "MIT"
-} 
+}
