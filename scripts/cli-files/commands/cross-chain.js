@@ -1,4 +1,4 @@
-// J3OS Cross-Chain Router Commands
+// Arvo OS Cross-Chain Router Commands
 const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
@@ -8,13 +8,13 @@ const { v4: uuidv4 } = require('uuid');
 // Import the actual cross-chain router module
 let CrossChainRouter, JuliaSwarmOptimizer, ChainId;
 try {
-  const crossChainModule = require('@juliaos/cross-chain-router');
+  const crossChainModule = require('@arvoos/cross-chain-router');
   CrossChainRouter = crossChainModule.CrossChainRouter;
   JuliaSwarmOptimizer = crossChainModule.JuliaSwarmOptimizer;
   ChainId = crossChainModule.ChainId;
-  console.log('Loaded @juliaos/cross-chain-router module successfully');
+  console.log('Loaded @arvoos/cross-chain-router module successfully');
 } catch (error) {
-  console.warn('Could not load @juliaos/cross-chain-router module:', error.message);
+  console.warn('Could not load @arvoos/cross-chain-router module:', error.message);
   console.warn('Running with limited functionality');
 }
 
