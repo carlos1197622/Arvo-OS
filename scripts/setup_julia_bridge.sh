@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# JuliaOS Bridge Setup Script
-# This script sets up the Julia environment and JuliaOSBridge package
+# Arvo OS Bridge Setup Script
+# This script sets up the Julia environment and ArvoBridge package
 
 set -e  # Exit on error
 
 echo "===================================="
-echo "JuliaOS Bridge Setup Script"
+echo "Arvo OS Bridge Setup Script"
 echo "===================================="
 
 # Check if Julia is installed
@@ -31,20 +31,20 @@ fi
 echo "Project root: $PROJECT_ROOT"
 echo "Julia directory: $JULIA_DIR"
 
-# Create the JuliaOSBridge directories if they don't exist
-BRIDGE_DIR="$PROJECT_ROOT/packages/julia-bridge"
+# Create the ArvoBridge directories if they don't exist
+BRIDGE_DIR="$PROJECT_ROOT/packages/arvo-bridge"
 BRIDGE_SRC_DIR="$BRIDGE_DIR/src"
 
 mkdir -p "$BRIDGE_SRC_DIR"
-echo "✅ Created JuliaOSBridge directories"
+echo "✅ Created ArvoBridge directories"
 
-# Check if Project.toml exists for JuliaOSBridge
+# Check if Project.toml exists for ArvoBridge
 if [ ! -f "$BRIDGE_DIR/Project.toml" ]; then
-    echo "Creating Project.toml for JuliaOSBridge..."
+    echo "Creating Project.toml for ArvoBridge..."
     cat > "$BRIDGE_DIR/Project.toml" << EOF
-name = "JuliaOSBridge"
+name = "ArvoBridge"
 uuid = "87654321-4321-8765-4321-876543210987"
-authors = ["JuliaOS Contributors <contributors@juliaos.org>"]
+authors = ["Arvo OS Contributors <contributors@arvoos.org>"]
 version = "0.1.0"
 
 [deps]
@@ -58,16 +58,16 @@ JSON = "0.21.4"
 WebSockets = "1.5.9"
 julia = "1.8"
 EOF
-    echo "✅ Created Project.toml for JuliaOSBridge"
+    echo "✅ Created Project.toml for ArvoBridge"
 else
-    echo "✅ Project.toml for JuliaOSBridge already exists"
+    echo "✅ Project.toml for ArvoBridge already exists"
 fi
 
-# Check if JuliaOSBridge.jl exists
-if [ ! -f "$BRIDGE_SRC_DIR/JuliaOSBridge.jl" ]; then
-    echo "Creating JuliaOSBridge.jl..."
-    cat > "$BRIDGE_SRC_DIR/JuliaOSBridge.jl" << 'EOF'
-module JuliaOSBridge
+# Check if ArvoBridge.jl exists
+if [ ! -f "$BRIDGE_SRC_DIR/ArvoBridge.jl" ]; then
+    echo "Creating ArvoBridge.jl..."
+    cat > "$BRIDGE_SRC_DIR/ArvoBridge.jl" << 'EOF'
+module ArvoBridge
 
 using HTTP
 using WebSockets
@@ -76,11 +76,6 @@ using JSON
 # Export key functions
 export deserialize_command, serialize_response, handle_ts_request
 
-"""
-    deserialize_command(json_data::String)
-
-Deserialize a command from TypeScript JSON format to a Julia Dict.
-"""
 function deserialize_command(json_data::String)
     try
         return JSON.parse(json_data)
@@ -90,11 +85,6 @@ function deserialize_command(json_data::String)
     end
 end
 
-"""
-    serialize_response(response_data)
-
-Serialize a Julia response to JSON format for TypeScript.
-"""
 function serialize_response(response_data)
     try
         return JSON.json(response_data)
@@ -104,30 +94,19 @@ function serialize_response(response_data)
     end
 end
 
-"""
-    handle_ts_request(request::Dict)
-
-Process a request from TypeScript and return the appropriate response.
-"""
 function handle_ts_request(request::Dict)
     try
-        # Extract request information
         command = get(request, "command", "")
         params = get(request, "params", Dict())
         id = get(request, "id", "unknown")
         
-        # Process different commands
         if command == "ping"
             return Dict("status" => "success", "id" => id, "result" => "pong", "timestamp" => string(now()))
         elseif command == "execute"
-            # Execute Julia code (sanitized and restricted)
             func_name = get(params, "function", "")
             func_params = get(params, "params", Dict())
-            
-            # Handle the function execution
             return _execute_function(func_name, func_params, id)
         elseif command == "get_system_info"
-            # Return system information
             return Dict(
                 "status" => "success", 
                 "id" => id,
@@ -137,8 +116,8 @@ function handle_ts_request(request::Dict)
                     "arch" => string(Sys.ARCH),
                     "threads" => Threads.nthreads(),
                     "memory" => Dict(
-                        "total" => Sys.total_memory() / (1024^3),  # GB
-                        "free" => Sys.free_memory() / (1024^3)     # GB
+                        "total" => Sys.total_memory() / (1024^3),
+                        "free" => Sys.free_memory() / (1024^3)
                     )
                 )
             )
@@ -151,15 +130,8 @@ function handle_ts_request(request::Dict)
     end
 end
 
-"""
-    _execute_function(func_name::String, func_params::Dict, id::String)
-
-Execute a Julia function with the provided parameters.
-"""
 function _execute_function(func_name::String, func_params::Dict, id::String)
     try
-        # Map of allowed functions (for security)
-        # This should be expanded based on actual needs
         function_map = Dict(
             "math.add" => (p) -> p["a"] + p["b"],
             "math.subtract" => (p) -> p["a"] - p["b"],
@@ -169,7 +141,6 @@ function _execute_function(func_name::String, func_params::Dict, id::String)
                 "total" => Sys.total_memory() / (1024^3),
                 "free" => Sys.free_memory() / (1024^3)
             )
-            # Add more functions as needed
         )
         
         if haskey(function_map, func_name)
@@ -184,16 +155,15 @@ function _execute_function(func_name::String, func_params::Dict, id::String)
     end
 end
 
-# Initialize the bridge module
 function __init__()
-    @info "JuliaOSBridge module initialized"
+    @info "ArvoBridge module initialized"
 end
 
 end # module
 EOF
-    echo "✅ Created JuliaOSBridge.jl"
+    echo "✅ Created ArvoBridge.jl"
 else
-    echo "✅ JuliaOSBridge.jl already exists"
+    echo "✅ ArvoBridge.jl already exists"
 fi
 
 # Run Julia setup script
@@ -202,15 +172,14 @@ cd "$JULIA_DIR"
 julia setup.jl
 
 # Run test bridge script
-echo "Testing JuliaOSBridge..."
+echo "Testing ArvoBridge..."
 julia test_bridge.jl
 
 echo "===================================="
 echo "Setup complete!"
-echo "You can now start the JuliaOS server by running:"
+echo "You can now start the Arvo OS server by running:"
 echo "cd $JULIA_DIR && julia start_server.jl"
 echo "===================================="
 
-# Make the troubleshoot script executable
 chmod +x "$JULIA_DIR/troubleshoot.jl"
-echo "For troubleshooting, you can run: $JULIA_DIR/troubleshoot.jl" 
+echo "For troubleshooting, you can run: $JULIA_DIR/troubleshoot.jl"
