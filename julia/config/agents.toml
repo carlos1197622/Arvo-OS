@@ -1,4 +1,4 @@
-# JuliaOS Agents Configuration
+# Arvo OS Agents Configuration
 
 # Storage settings
 [storage]
@@ -29,7 +29,7 @@ retention_period = 86400  # 24 hours in seconds
 enabled = true
 backend = "memory"  # Options: none, memory, redis, nats, zeromq
 connection_string = ""
-default_topic = "juliaos.swarm"
+default_topic = "arvoos.swarm"
 
 # LLM settings
 [llm]
