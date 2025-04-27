@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * JuliaOS CLI Launcher
+ * Arvo OS CLI Launcher
  * 
- * This script launches the JuliaOS CLI by requiring the interactive.cjs file
+ * This script launches the Arvo OS CLI by requiring the interactive.cjs file
  * from the packages/cli/src directory.
  */
 
