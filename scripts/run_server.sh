@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Script to run the JuliaOS server
+# Script to run the Arvo OS server
 
 # Get the project root directory
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # Change to the julia directory
 cd "$PROJECT_ROOT/julia"
-echo "Starting JuliaOS server from $(pwd)"
+echo "Starting Arvo OS server from $(pwd)"
 
 # Check if Julia is installed
 if ! command -v julia &> /dev/null; then
@@ -61,13 +61,13 @@ fi
 
 # Run the server
 echo "Running with Julia $(julia --version)"
-echo "Starting JuliaOS server on $HOST:$PORT"
+echo "Starting Arvo OS server on $HOST:$PORT"
 echo "Command: $CMD"
 
 $CMD
 
 # Check exit status
 if [ $? -ne 0 ]; then
-  echo "Error: JuliaOS server failed to start."
+  echo "Error: Arvo OS server failed to start."
   exit 1
 fi
