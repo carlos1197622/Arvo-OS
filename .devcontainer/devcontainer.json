@@ -1,5 +1,5 @@
 {
-  "name": "J3OS Interactive Environment",
+  "name": "Arvo-OS Interactive Environment",
   "dockerFile": "../Dockerfile.interactive",
   "customizations": {
     "vscode": {
