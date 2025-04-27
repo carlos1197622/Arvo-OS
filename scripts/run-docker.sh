@@ -49,22 +49,21 @@ build() {
   return 0
 }
 
-# Start the JuliaOS server
+# Start the Arvo OS server
 start_server() {
-  echo -e "${BLUE}Starting JuliaOS server...${NC}"
-  $COMPOSE_CMD up -d juliaos-server
+  echo -e "${BLUE}Starting Arvo OS server...${NC}"
+  $COMPOSE_CMD up -d arvoos-server
   if [ $? -ne 0 ]; then
-    echo -e "${RED}Failed to start JuliaOS server. Exiting.${NC}"
+    echo -e "${RED}Failed to start Arvo OS server. Exiting.${NC}"
     return 1
   fi
 
-  # Wait for server to be healthy
-  echo -e "${BLUE}Waiting for JuliaOS server to be ready...${NC}"
+  echo -e "${BLUE}Waiting for Arvo OS server to be ready...${NC}"
   attempt=0
   max_attempts=30
   while [ $attempt -lt $max_attempts ]; do
-    if $COMPOSE_CMD ps juliaos-server | grep -q "(healthy)"; then
-      echo -e "${GREEN}JuliaOS server is ready!${NC}"
+    if $COMPOSE_CMD ps arvoos-server | grep -q "(healthy)"; then
+      echo -e "${GREEN}Arvo OS server is ready!${NC}"
       return 0
     fi
     echo -e "${YELLOW}Waiting for server to be ready... (${attempt}/${max_attempts})${NC}"
@@ -72,33 +71,33 @@ start_server() {
     attempt=$((attempt+1))
   done
 
-  echo -e "${RED}Timed out waiting for JuliaOS server to be ready. Check logs with 'docker compose logs juliaos-server'${NC}"
+  echo -e "${RED}Timed out waiting for Arvo OS server to be ready. Check logs with 'docker compose logs arvoos-server'${NC}"
   return 1
 }
 
-# Start the JuliaOS CLI
+# Start the Arvo OS CLI
 start_cli() {
-  echo -e "${BLUE}Starting JuliaOS CLI...${NC}"
-  $COMPOSE_CMD run --rm juliaos-cli
+  echo -e "${BLUE}Starting Arvo OS CLI...${NC}"
+  $COMPOSE_CMD run --rm arvoos-cli
   return $?
 }
 
 # Start both server and CLI
 start_all() {
-  echo -e "${BLUE}Starting JuliaOS (server and CLI)...${NC}"
+  echo -e "${BLUE}Starting Arvo OS (server and CLI)...${NC}"
   $COMPOSE_CMD up
   return $?
 }
 
 # Stop all containers
 stop() {
-  echo -e "${BLUE}Stopping JuliaOS...${NC}"
+  echo -e "${BLUE}Stopping Arvo OS...${NC}"
   $COMPOSE_CMD down
   if [ $? -ne 0 ]; then
-    echo -e "${RED}Failed to stop JuliaOS. Exiting.${NC}"
+    echo -e "${RED}Failed to stop Arvo OS. Exiting.${NC}"
     return 1
   fi
-  echo -e "${GREEN}JuliaOS stopped successfully.${NC}"
+  echo -e "${GREEN}Arvo OS stopped successfully.${NC}"
   return 0
 }
 
@@ -117,13 +116,13 @@ logs() {
 
 # Show help
 show_help() {
-  echo -e "${BLUE}JuliaOS Docker Helper Script${NC}"
+  echo -e "${BLUE}Arvo OS Docker Helper Script${NC}"
   echo -e "Usage: $0 [command]"
   echo -e ""
   echo -e "Commands:"
   echo -e "  ${GREEN}build${NC}       Build Docker images"
-  echo -e "  ${GREEN}server${NC}      Start the JuliaOS server"
-  echo -e "  ${GREEN}cli${NC}         Start the JuliaOS CLI (requires server to be running)"
+  echo -e "  ${GREEN}server${NC}      Start the Arvo OS server"
+  echo -e "  ${GREEN}cli${NC}         Start the Arvo OS CLI (requires server to be running)"
   echo -e "  ${GREEN}start${NC}       Start both server and CLI"
   echo -e "  ${GREEN}stop${NC}        Stop all containers"
   echo -e "  ${GREEN}logs${NC}        Show logs (usage: $0 logs [service])"
@@ -131,8 +130,8 @@ show_help() {
   echo -e ""
   echo -e "Examples:"
   echo -e "  $0 build       # Build Docker images"
-  echo -e "  $0 server      # Start the JuliaOS server"
-  echo -e "  $0 cli         # Start the JuliaOS CLI"
+  echo -e "  $0 server      # Start the Arvo OS server"
+  echo -e "  $0 cli         # Start the Arvo OS CLI"
   echo -e "  $0 start       # Start both server and CLI"
   echo -e "  $0 stop        # Stop all containers"
   echo -e "  $0 logs        # Show logs for all services"
@@ -153,22 +152,18 @@ verify_setup() {
 
 # Main function
 main() {
-  # Set default compose command
   COMPOSE_CMD="docker compose"
 
-  # Check if Docker is installed
   check_docker
   if [ $? -ne 0 ]; then
     exit 1
   fi
 
-  # Check if Docker Compose is installed
   check_docker_compose
   if [ $? -ne 0 ]; then
     exit 1
   fi
 
-  # Verify Docker setup
   if [ "$1" != "help" ] && [ "$1" != "--help" ] && [ "$1" != "-h" ]; then
     verify_setup
     if [ $? -ne 0 ]; then
@@ -177,7 +172,6 @@ main() {
     fi
   fi
 
-  # Process command
   case "$1" in
     build)
       build
@@ -209,8 +203,5 @@ main() {
   exit $?
 }
 
-# Make the script executable
 chmod +x "$0"
-
-# Run the main function with all arguments
 main "$@"
