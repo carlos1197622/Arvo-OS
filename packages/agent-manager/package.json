@@ -1,7 +1,7 @@
 {
-  "name": "@j3os/agent-manager",
+  "name": "@arvoos/agent-manager",
   "version": "0.1.0",
-  "description": "Agent management system for J3OS",
+  "description": "Agent management system for Arvo OS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -13,7 +13,7 @@
     "example": "ts-node src/examples/basic-usage.ts"
   },
   "dependencies": {
-    "@j3os/julia-bridge": "^0.1.0",
+    "@arvoos/arvo-bridge": "^0.1.0",
     "langchain": "^0.0.192",
     "@langchain/openai": "^0.0.10",
     "@langchain/community": "^0.0.15",
@@ -34,4 +34,4 @@
     "@typescript-eslint/parser": "^7.1.0",
     "ts-node": "^10.9.2"
   }
-} 
+}
