@@ -5,5 +5,5 @@ if [ -f .env ]; then
     source .env
 fi
 
-# Start the Julia server
+# Start the Arvo OS server
 julia --project=. server/julia_server.jl "$@"
