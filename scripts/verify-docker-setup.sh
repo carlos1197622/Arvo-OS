@@ -7,7 +7,7 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}Verifying Docker setup for JuliaOS...${NC}"
+echo -e "${BLUE}Verifying Docker setup for Arvo OS...${NC}"
 
 # Check if required files exist
 echo -e "${BLUE}Checking for required files...${NC}"
@@ -16,7 +16,6 @@ echo -e "${BLUE}Checking for required files...${NC}"
 if [ ! -f "julia/server/julia_server.jl" ]; then
   echo -e "${RED}Error: julia_server.jl not found at julia/server/julia_server.jl${NC}"
   
-  # Check if it's in a different location
   JULIA_SERVER_FILES=$(find julia -name "julia_server.jl")
   if [ -n "$JULIA_SERVER_FILES" ]; then
     echo -e "${YELLOW}Found julia_server.jl in alternative location(s):${NC}"
@@ -35,7 +34,6 @@ fi
 if [ ! -f "packages/cli/src/interactive.cjs" ]; then
   echo -e "${RED}Error: interactive.cjs not found at packages/cli/src/interactive.cjs${NC}"
   
-  # Check if it's in a different location
   CLI_FILES=$(find . -name "interactive.cjs")
   if [ -n "$CLI_FILES" ]; then
     echo -e "${YELLOW}Found interactive.cjs in alternative location(s):${NC}"
@@ -54,7 +52,6 @@ fi
 if [ ! -f "packages/cli/src/mock_server.js" ]; then
   echo -e "${YELLOW}Warning: mock_server.js not found at packages/cli/src/mock_server.js${NC}"
   
-  # Check if it's in a different location
   MOCK_FILES=$(find . -name "mock_server.js")
   if [ -n "$MOCK_FILES" ]; then
     echo -e "${YELLOW}Found mock_server.js in alternative location(s):${NC}"
@@ -87,8 +84,8 @@ else
 fi
 
 echo -e "${GREEN}Docker setup verification completed successfully!${NC}"
-echo -e "${BLUE}You can now run JuliaOS with Docker using:${NC}"
-echo -e "${GREEN}./run-juliaos.sh${NC}"
+echo -e "${BLUE}You can now run Arvo OS with Docker using:${NC}"
+echo -e "${GREEN}./run-arvoos.sh${NC}"
 echo -e "${BLUE}or for more control:${NC}"
 echo -e "${GREEN}./scripts/run-docker.sh build${NC}"
 echo -e "${GREEN}./scripts/run-docker.sh start${NC}"
