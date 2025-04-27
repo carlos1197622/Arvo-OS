@@ -1,7 +1,7 @@
 #!/usr/bin/env julia
 
-# Test script for the enhanced Agents.jl implementation
-println("Testing enhanced Agents.jl implementation...")
+# Test script for the enhanced Arvo OS Agents
+println("Testing enhanced Arvo OS Agents implementation...")
 
 # Include the Agents.jl file directly
 include(joinpath(@__DIR__, "src", "agents", "Agents.jl"))
@@ -11,7 +11,6 @@ using .Agents
 
 # Test 1: Create an agent with the new features
 println("\n=== Test 1: Create an agent ===")
-# Get the TRADING enum value
 trading_type = Agents.AgentType(1) # TRADING = 1
 
 config = AgentConfig(
@@ -51,7 +50,6 @@ println("\n=== Test 4: Agent memory ===")
 setAgentMemory(agent.id, "test_key", "test_value")
 setAgentMemory(agent.id, "another_key", Dict("nested" => "value"))
 
-# Test LRU behavior by adding many items
 for i in 1:10
     setAgentMemory(agent.id, "key_$i", i)
 end
