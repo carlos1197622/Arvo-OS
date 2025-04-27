@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 import { v4 as uuidv4 } from 'uuid';
-import { JuliaBridge } from '@j3os/julia-bridge';
+import { JuliaBridge } from '@arvoos/arvo-bridge';
 import {
   AgentConfig,
   AgentState,
