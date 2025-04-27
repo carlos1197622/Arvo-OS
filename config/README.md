@@ -1,6 +1,6 @@
 # Configuration Directory
 
-This directory contains configuration files for the JuliaOS Framework.
+This directory contains configuration files for the Arvo-OS Framework.
 
 ## Files
 
