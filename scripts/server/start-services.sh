@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Start all JuliaOS services
-echo "Starting JuliaOS services..."
+# Start all Arvo OS services
+echo "Starting Arvo OS services..."
 
 # Get the project root directory
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
