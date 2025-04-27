@@ -1,4 +1,4 @@
-name: JuliaOS CI
+name: Arvo OS CI
 
 on:
   push:
@@ -9,7 +9,9 @@ on:
 
 jobs:
   test:
-    name: Julia ${{ matrix.version }} - ${{ matrix.os }} - ${{ matrix.arch }}
+    name: Arvo OS Julia ${{ matrix.version }} - ${{ matrix.os }} - ${{ matrix.arch }}
+    ...
+
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
