@@ -1,4 +1,4 @@
-# JuliaOS Configuration Example
+# Arvo OS Configuration Example
 # Copy this file to config.toml and update with your own values
 
 # Server configuration
@@ -9,7 +9,7 @@ workers = 4
 
 # Storage configuration
 [storage]
-local_db_path = "~/.juliaos/juliaos.sqlite"
+local_db_path = "~/.arvoos/arvoos.sqlite"
 # Arweave configuration for decentralized storage
 arweave_wallet_file = ""  # Path to your Arweave wallet JSON file
 arweave_gateway = "arweave.net"
@@ -21,8 +21,7 @@ arweave_logging = false
 # Blockchain configuration
 [blockchain]
 default_chain = "ethereum"
-# Replace these with your own RPC URLs
-rpc_urls.ethereum = "https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY"  # Get your key at https://infura.io
+rpc_urls.ethereum = "https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY"
 rpc_urls.polygon = "https://polygon-rpc.com"
 rpc_urls.solana = "https://api.mainnet-beta.solana.com"
 max_gas_price = 100.0  # Maximum gas price in GWEI
@@ -55,14 +54,12 @@ network = "testnet"  # "mainnet" or "testnet"
 # Ethereum network configuration for Wormhole
 [wormhole.networks.ethereum]
 enabled = true
-rpcUrl = "https://goerli.infura.io/v3/YOUR_INFURA_API_KEY"  # For testnet (Goerli)
-# rpcUrl = "https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY"  # For mainnet
+rpcUrl = "https://goerli.infura.io/v3/YOUR_INFURA_API_KEY"
 
 # Solana network configuration for Wormhole
 [wormhole.networks.solana]
 enabled = true
-rpcUrl = "https://api.devnet.solana.com"  # For testnet (Devnet)
-# rpcUrl = "https://api.mainnet-beta.solana.com"  # For mainnet
+rpcUrl = "https://api.devnet.solana.com"
 
 # Logging configuration
 [logging]
