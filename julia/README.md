@@ -1,27 +1,27 @@
-# JuliaOS Backend
+# Arvo OS Backend
 
-The JuliaOS backend is a high-performance, modular system written in Julia, designed to support advanced agent-based operations and cross-chain interactions.
+The Arvo OS backend is a high-performance, modular system written in Julia, designed to support advanced agent-based operations and cross-chain interactions.
 
 ## Project Structure
 
 ```
-/julia
+/arvo
 ├── src/                    # Source code
-│   ├── agents/            # Agent system implementation
-│   ├── swarm/             # Swarm algorithms and management
-│   │   └── algorithms/    # Swarm optimization algorithms
-│   ├── blockchain/        # Blockchain connectivity
-│   ├── bridges/           # Cross-chain bridge implementations
-│   ├── dex/               # DEX integrations
-│   ├── storage/           # Storage solutions
-│   └── api/               # API and command handlers
-│       └── rest/          # REST API implementation
-│           └── handlers/  # Command handlers
-├── server/                # Server implementation
-│   └── julia_server.jl    # Main entry point
-├── test/                  # Tests
-├── Project.toml           # Julia project dependencies
-└── Manifest.toml          # Julia package manifest
+│   ├── agents/             # Agent system implementation
+│   ├── swarm/              # Swarm algorithms and management
+│   │   └── algorithms/     # Swarm optimization algorithms
+│   ├── blockchain/         # Blockchain connectivity
+│   ├── bridges/            # Cross-chain bridge implementations
+│   ├── dex/                # DEX integrations
+│   ├── storage/            # Storage solutions
+│   └── api/                # API and command handlers
+│       └── rest/           # REST API implementation
+│           └── handlers/   # Command handlers
+├── server/                 # Server implementation
+│   └── julia_server.jl     # Main entry point
+├── test/                   # Tests
+├── Project.toml            # Julia project dependencies
+└── Manifest.toml           # Julia package manifest
 ```
 
 ## Features
@@ -44,18 +44,18 @@ The JuliaOS backend is a high-performance, modular system written in Julia, desi
 
 2. **Installation**:
    ```bash
-   git clone https://github.com/your-org/juliaos.git
-   cd juliaos/julia
+   git clone https://github.com/your-org/arvo-os.git
+   cd arvo-os/arvo
    julia --project=. -e 'using Pkg; Pkg.instantiate()'
    ```
 
 3. **Configuration**:
    - Configuration is handled automatically
-   - Default storage location is `~/.juliaos/juliaos.sqlite`
+   - Default storage location is `~/.arvoos/arvoos.sqlite`
 
 4. **Running**:
    ```bash
-   cd julia
+   cd arvo
    julia --project=. server/julia_server.jl
    ```
 
@@ -63,7 +63,7 @@ The JuliaOS backend is a high-performance, modular system written in Julia, desi
 
 1. **Setting Up Development Environment**:
    ```bash
-   cd julia
+   cd arvo
    julia --project=. -e 'using Pkg; Pkg.instantiate()'
    ```
 
@@ -86,7 +86,7 @@ The JuliaOS backend is a high-performance, modular system written in Julia, desi
 
 ## API Documentation
 
-The JuliaOS API is accessible via HTTP POST requests to the `/api` endpoint. All commands follow the format:
+The Arvo OS API is accessible via HTTP POST requests to the `/api` endpoint. All commands follow the format:
 
 ```json
 {
@@ -149,4 +149,4 @@ MIT License - see LICENSE file for details
 
 ## Contact
 
-- GitHub Issues: [Project Issues](https://github.com/your-org/juliaos/issues)
+- GitHub Issues: [Project Issues](https://github.com/your-org/arvo-os/issues)
