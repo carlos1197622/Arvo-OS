@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# JuliaOS Benchmarking Startup Script
+# Arvo OS Benchmarking Startup Script
 # This script sets up the environment and starts the benchmarking server
 
 # Print banner
-echo "JuliaOS Benchmarking"
+echo "Arvo OS Benchmarking"
 echo "===================="
 echo
 
@@ -42,7 +42,6 @@ if lsof -Pi :8052 -sTCP:LISTEN -t >/dev/null ; then
     echo "⚠️ Port 8052 is already in use"
     echo "Attempting to kill the process..."
     
-    # Try to kill the process
     PID=$(lsof -Pi :8052 -sTCP:LISTEN -t)
     if kill -9 $PID 2>/dev/null; then
         echo "✅ Process killed successfully"
