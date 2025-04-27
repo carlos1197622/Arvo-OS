@@ -7,7 +7,7 @@ YELLOW='\033[0;33m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}Starting JuliaOS in Docker...${NC}"
+echo -e "${BLUE}Starting Arvo OS in Docker...${NC}"
 
 # Run verification script
 if [ -f "./scripts/verify-docker-setup.sh" ]; then
@@ -46,9 +46,9 @@ if [ -z "$COMPOSE_CMD" ]; then
     fi
 fi
 
-# Build and start JuliaOS
-echo -e "${BLUE}Building and starting JuliaOS...${NC}"
+# Build and start Arvo OS
+echo -e "${BLUE}Building and starting Arvo OS...${NC}"
 echo -e "${YELLOW}This may take a few minutes on the first run as it downloads and builds the Docker images.${NC}"
 $COMPOSE_CMD up --build
 
-echo -e "${GREEN}JuliaOS has been stopped.${NC}"
+echo -e "${GREEN}Arvo OS has been stopped.${NC}"
