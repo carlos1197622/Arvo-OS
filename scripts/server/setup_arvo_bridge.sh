@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# setup_julia_bridge.sh - Script to set up Julia bridge for Arvo OS
+# setup_arvo_bridge.sh - Script to set up Arvo OS bridge
 # This script initializes the bridge between JavaScript and Julia
 
 # Get the project root directory
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
-echo "Setting up Julia bridge..."
+echo "Setting up Arvo OS bridge..."
 
 # Check if Julia is installed
 if ! command -v julia &> /dev/null; then
@@ -35,7 +35,7 @@ echo "Installing required Julia packages..."
 julia -e 'using Pkg; Pkg.add(["HTTP", "WebSockets", "JSON", "DataFrames", "Plots", "SQLite", "TimeSeries", "Distributions"])'
 
 # Initialize the Julia bridge
-echo "Initializing Julia bridge..."
+echo "Initializing Arvo OS bridge..."
 cat > julia/bridge/init.jl << 'EOF'
 module BridgeInit
 
@@ -73,5 +73,5 @@ export interface CommandResponse {
 }
 EOF
 
-echo "Julia bridge setup complete!"
+echo "Arvo OS bridge setup complete!"
 echo "You can now use the bridge to communicate between JavaScript and Julia."
