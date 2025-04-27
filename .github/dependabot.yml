@@ -1,7 +1,8 @@
-# Dependabot configuration for JuliaOS
+# Dependabot configuration for Arvo-OS
 #
 # This file configures automated dependency updates across multiple package ecosystems
 # Docs: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
 
 version: 2
 updates:
