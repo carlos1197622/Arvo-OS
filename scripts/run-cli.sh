@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run JuliaOS CLI with Julia server
+# Run Arvo OS CLI with Julia server
 # This script starts the Julia server and then runs the CLI
 
 # Set environment variables
@@ -19,5 +19,5 @@ if [ $? -ne 0 ]; then
 fi
 
 # Run CLI
-echo "Starting JuliaOS CLI..."
+echo "Starting Arvo OS CLI..."
 node scripts/interactive.cjs
