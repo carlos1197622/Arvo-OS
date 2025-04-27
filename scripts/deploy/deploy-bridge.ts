@@ -3,15 +3,15 @@ import fs from "fs";
 import path from "path";
 
 async function main() {
-  console.log("Deploying JuliaBridge contract...");
+  console.log("Deploying ArvoBridge contract...");
 
-  // Deploy the JuliaBridge contract
-  const JuliaBridge = await ethers.getContractFactory("JuliaBridge");
-  const bridge = await JuliaBridge.deploy();
+  // Deploy the ArvoBridge contract
+  const ArvoBridge = await ethers.getContractFactory("ArvoBridge");
+  const bridge = await ArvoBridge.deploy();
   await bridge.waitForDeployment();
 
   const bridgeAddress = await bridge.getAddress();
-  console.log("JuliaBridge deployed to:", bridgeAddress);
+  console.log("ArvoBridge deployed to:", bridgeAddress);
 
   // Deploy a test token
   console.log("Deploying TestToken contract...");
@@ -64,4 +64,4 @@ async function main() {
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
-}); 
+});
