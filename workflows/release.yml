@@ -1,4 +1,4 @@
-name: JuliaOS Release
+name: Arvo OS Release
 
 on:
   workflow_dispatch:
@@ -45,7 +45,6 @@ jobs:
         with:
           version: '1.10'
       
-      # Run tests to make sure everything works before release
       - name: Build Julia package
         uses: julia-actions/julia-buildpkg@v1
         
@@ -88,15 +87,10 @@ jobs:
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
           echo "Setting version to ${VERSION}"
       
-      # Update version in package.json files
       - name: Update package.json versions
         run: |
           VERSION=${{ steps.version.outputs.version }}
-          
-          # Update root package.json
           npm version $VERSION --no-git-tag-version
-          
-          # Update all package.json files in packages directory
           for pkg in packages/*; do
             if [ -f "$pkg/package.json" ]; then
               cd $pkg
@@ -105,22 +99,17 @@ jobs:
             fi
           done
       
-      # Update version in Julia Project.toml
       - name: Update Julia Project.toml
         run: |
           VERSION=${{ steps.version.outputs.version }}
-          
-          # Update julia/Project.toml
           sed -i "s/^version = \".*\"/version = \"$VERSION\"/" julia/Project.toml
       
-      # Generate changelog
       - name: Generate changelog
         id: changelog
         uses: metcalfc/changelog-generator@v4.0.1
         with:
           myToken: ${{ secrets.GITHUB_TOKEN }}
       
-      # Create CHANGELOG entry
       - name: Update CHANGELOG.md
         run: |
           VERSION=${{ steps.version.outputs.version }}
@@ -128,14 +117,11 @@ jobs:
           DATE=$(date +%Y-%m-%d)
           
           if [ -f "CHANGELOG.md" ]; then
-            # Prepend new entry to existing CHANGELOG.md
             sed -i "1i## v${VERSION} (${DATE})\n\n${CHANGELOG}\n\n" CHANGELOG.md
           else
-            # Create new CHANGELOG.md
             echo -e "# Changelog\n\n## v${VERSION} (${DATE})\n\n${CHANGELOG}\n" > CHANGELOG.md
           fi
       
-      # Commit version changes
       - name: Commit changes
         run: |
           VERSION=${{ steps.version.outputs.version }}
@@ -167,23 +153,18 @@ jobs:
       - name: Build packages
         run: npm run build
       
-      # Publish to npm if not a prerelease
       - name: Publish to npm
         if: ${{ github.event.inputs.prerelease == 'false' }}
-        run: |
-          npm run publish-packages
+        run: npm run publish-packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       
-      # Publish to npm with prerelease tag if prerelease
       - name: Publish to npm (prerelease)
         if: ${{ github.event.inputs.prerelease == 'true' }}
-        run: |
-          npm run publish-packages -- --tag next
+        run: npm run publish-packages -- --tag next
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       
-      # Build and publish Python package if not a prerelease
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
@@ -200,22 +181,19 @@ jobs:
           TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       
-      # Build and publish Python package with prerelease classifier if prerelease
       - name: Build and publish Python package (prerelease)
         if: ${{ github.event.inputs.prerelease == 'true' }}
         run: |
           cd packages/python-wrapper
-          # Update version to add prerelease suffix
           VERSION=${{ needs.prepare-release.outputs.version }}
           sed -i "s/version=\"$VERSION\"/version=\"$VERSION.dev0\"/" setup.py
-          
           pip install build twine
           python -m build
           python -m twine upload dist/*
         env:
           TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-  
+
   create-github-release:
     name: Create GitHub Release
     needs: [prepare-release, build-and-publish]
@@ -226,14 +204,12 @@ jobs:
         with:
           ref: "v${{ needs.prepare-release.outputs.version }}"
       
-      # Generate changelog
       - name: Generate changelog
         id: changelog
         uses: metcalfc/changelog-generator@v4.0.1
         with:
           myToken: ${{ secrets.GITHUB_TOKEN }}
       
-      # Create GitHub Release
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
@@ -248,7 +224,7 @@ jobs:
             CHANGELOG.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
+
   notify:
     name: Notification
     needs: [prepare-release, create-github-release]
@@ -269,10 +245,10 @@ jobs:
             RELEASE_TYPE="release"
           fi
           
-          echo "✅ JuliaOS v${VERSION} ${TYPE} ${RELEASE_TYPE} successfully published!"
+          echo "✅ Arvo OS v${VERSION} ${TYPE} ${RELEASE_TYPE} successfully published!"
       
       - name: Notify failure
         if: ${{ failure() }}
         run: |
           VERSION=${{ needs.prepare-release.outputs.version }}
-          echo "❌ JuliaOS v${VERSION} release failed! Check the job logs for details."
+          echo "❌ Arvo OS v${VERSION} release failed! Check the job logs for details."
