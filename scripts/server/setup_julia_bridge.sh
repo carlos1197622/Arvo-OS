@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# setup_julia_bridge.sh - Script to set up Julia bridge for JuliaOS
+# setup_julia_bridge.sh - Script to set up Julia bridge for Arvo OS
 # This script initializes the bridge between JavaScript and Julia
 
 # Get the project root directory
@@ -19,7 +19,6 @@ fi
 JULIA_VERSION=$(julia --version | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
 REQUIRED_VERSION="1.6.0"
 
-# Compare versions using sort -V
 if [ "$(printf '%s\n' "$REQUIRED_VERSION" "$JULIA_VERSION" | sort -V | head -n1)" != "$REQUIRED_VERSION" ]; then
     echo "Julia version $JULIA_VERSION detected. Version $REQUIRED_VERSION or higher is required."
     exit 1
@@ -44,13 +43,11 @@ using HTTP
 using WebSockets
 using JSON
 
-# Initialize the bridge
 function initialize()
     println("Julia bridge initialized!")
     return Dict("status" => "initialized", "timestamp" => string(Dates.now()))
 end
 
-# Test connection
 function test_connection()
     return Dict("status" => "connected", "timestamp" => string(Dates.now()))
 end
