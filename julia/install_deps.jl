@@ -1,6 +1,6 @@
 #!/usr/bin/env julia
 
-# Install dependencies for the enhanced Agents.jl
+# Install dependencies for the Arvo OS enhanced Agents
 using Pkg
 
 # List of packages to install
